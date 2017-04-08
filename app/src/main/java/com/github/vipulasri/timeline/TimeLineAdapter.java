@@ -49,36 +49,31 @@ public class TimeLineAdapter extends RecyclerView.Adapter<TimeLineViewHolder> {
             case PROFILE_ITEM:
                 holder.mLeftImage.setImageResource(R.mipmap.profile_icon);
                 holder.mLeftImage.requestLayout();
-                holder.mLeftImage.getLayoutParams().height = 30;
-                holder.mLeftImage.getLayoutParams().width = 30;
+                holder.mLeftImage.getLayoutParams().height = 100;
                 holder.mRightImage.setVisibility(GONE);
                 break;
             case ACTION_ITEM:
                 holder.mRightImage.setImageResource(R.mipmap.action_item_icon);
                 holder.mRightImage.requestLayout();
-                holder.mRightImage.getLayoutParams().height = 30;
-                holder.mRightImage.getLayoutParams().width = 30;
+                holder.mRightImage.getLayoutParams().height = 100;
                 holder.mLeftImage.setVisibility(GONE);
                 break;
             case VOICE_MEMO:
                 holder.mLeftImage.setImageResource(R.drawable.voice_memo_icon);
                 holder.mLeftImage.requestLayout();
-                holder.mLeftImage.getLayoutParams().height = 30;
-                holder.mLeftImage.getLayoutParams().width = 30;
+                holder.mLeftImage.getLayoutParams().height = 100;
                 holder.mRightImage.setVisibility(GONE);
                 break;
             case SCREEN_SHOT:
                 holder.mRightImage.setImageResource(R.mipmap.screenshot_icon);
                 holder.mRightImage.requestLayout();
-                holder.mRightImage.getLayoutParams().height = 60;
-                holder.mRightImage.getLayoutParams().width = 60;
+                holder.mRightImage.getLayoutParams().width = 400;
                 holder.mLeftImage.setVisibility(GONE);
                 break;
             case PRESENTATION_INFO:
                 holder.mRightImage.setImageResource(R.mipmap.presentation_icon);
                 holder.mRightImage.requestLayout();
-                holder.mRightImage.getLayoutParams().height = 60;
-                holder.mRightImage.getLayoutParams().width = 60;
+                holder.mRightImage.getLayoutParams().width = 400;
                 holder.mLeftImage.setVisibility(GONE);
                 break;
             default: break;

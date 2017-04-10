@@ -1,45 +1,27 @@
 package com.github.vipulasri.timeline;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.View;
-import android.widget.Button;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 
-import butterknife.BindView;
 import butterknife.ButterKnife;
 
-/**
- * Created by HP-HP on 07-06-2016.
- */
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends FragmentActivity {
 
-    @BindView(R.id.verticalTimeLineButton)
-    Button mVerticalTimeLineButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
         ButterKnife.bind(this);
 
-        mVerticalTimeLineButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onButtonClick();
-            }
-        });
+        // to give support on lower android version, we are not calling getFragmentManager()
+        FragmentManager fm = getSupportFragmentManager();
 
-    }
-
-    private void onButtonClick() {
-        Intent intent = new Intent(this, TimeLineActivity.class);
-        startActivity(intent);
+        // Create the list fragment and add it as our sole content.
+        if (fm.findFragmentById(android.R.id.content) == null) {
+            TimeLineFragment list = new TimeLineFragment();
+            fm.beginTransaction().add(android.R.id.content, list).commit();
+        }
     }
 
 }

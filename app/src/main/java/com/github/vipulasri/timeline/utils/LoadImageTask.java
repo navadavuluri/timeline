@@ -1,8 +1,5 @@
 package com.github.vipulasri.timeline.utils;
 
-/**
- * Created by navadavuluri on 4/7/17.
- */
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;

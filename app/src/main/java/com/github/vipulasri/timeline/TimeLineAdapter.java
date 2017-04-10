@@ -1,92 +1,104 @@
 package com.github.vipulasri.timeline;
 
 import android.content.Context;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ArrayAdapter;
 
 import com.github.vipulasri.timeline.model.TimeLineModel;
-import com.github.vipulasri.timeline.utils.DateTimeUtils;
-import com.github.vipulasri.timeline.utils.VectorDrawableUtils;
 import com.github.vipulasri.timelineview.TimelineView;
 
 import java.util.List;
 
 import static android.view.View.GONE;
 
-/**
- * Created by HP-HP on 05-12-2015.
- */
-public class TimeLineAdapter extends RecyclerView.Adapter<TimeLineViewHolder> {
 
-    private List<TimeLineModel> mFeedList;
-    private Context mContext;
+public class TimeLineAdapter extends ArrayAdapter<TimeLineModel> {
 
-    public TimeLineAdapter(List<TimeLineModel> feedList) {
-        mFeedList = feedList;
+    private List<TimeLineModel> dataSet;
+    Context mContext;
+
+    public TimeLineAdapter(List<TimeLineModel> data, Context context) {
+        super(context, R.layout.activity_timeline, data);
+        this.dataSet  = data;
+        this.mContext = context;
+
     }
 
-    @Override
+    private int lastPosition = -1;
+
     public int getItemViewType(int position) {
-        return TimelineView.getTimeLineViewType(position,getItemCount());
+        return TimelineView.getTimeLineViewType(position, getCount());
     }
 
     @Override
-    public TimeLineViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        mContext = parent.getContext();
-        View view = LayoutInflater.from(mContext).inflate(R.layout.item_timeline, parent, false);
-        return new TimeLineViewHolder(view, viewType);
-    }
+    public View getView(int position, View convertView, ViewGroup parent) {
+        TimeLineModel timeLineModel = getItem(position);
+        TimeLineViewHolder holder; // view lookup cache stored in tag
+        final View result;
+        if (convertView == null) {
+            LayoutInflater inflater = LayoutInflater.from(getContext());
+            convertView = inflater.inflate(R.layout.item_timeline, parent, false);
+            holder = new TimeLineViewHolder(convertView, getItemViewType(position));
+            holder.mDate.setText(timeLineModel.getDate());
+            holder.mMessage.setText(timeLineModel.getMessage());
+            result = convertView;
+            convertView.setTag(holder);
+        } else {
+            holder = (TimeLineViewHolder) convertView.getTag();
+            holder.mDate.setText(timeLineModel.getDate());
+            holder.mMessage.setText(timeLineModel.getMessage());
+            result = convertView;
+        }
 
-    @Override
-    public void onBindViewHolder(TimeLineViewHolder holder, int position) {
-        holder.mTimelineView.setMarker(VectorDrawableUtils.getDrawable(mContext, R.drawable.ic_marker_active, R.color.colorPrimary));
-        TimeLineModel timeLineModel = mFeedList.get(position);
         switch (timeLineModel.getStatus()) {
             case PROFILE_ITEM:
                 holder.mLeftImage.setImageResource(R.mipmap.profile_icon);
                 holder.mLeftImage.requestLayout();
-                holder.mLeftImage.getLayoutParams().height = 100;
+                holder.mLeftImage.getLayoutParams().height = 48;
                 holder.mRightImage.setVisibility(GONE);
                 break;
             case ACTION_ITEM:
                 holder.mRightImage.setImageResource(R.mipmap.action_item_icon);
                 holder.mRightImage.requestLayout();
-                holder.mRightImage.getLayoutParams().height = 100;
+                holder.mRightImage.getLayoutParams().height = 48;
                 holder.mLeftImage.setVisibility(GONE);
                 break;
             case VOICE_MEMO:
                 holder.mLeftImage.setImageResource(R.drawable.voice_memo_icon);
+                holder.mLeftImage.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                    }
+                });
                 holder.mLeftImage.requestLayout();
-                holder.mLeftImage.getLayoutParams().height = 100;
+                holder.mLeftImage.getLayoutParams().height = 48;
                 holder.mRightImage.setVisibility(GONE);
                 break;
             case SCREEN_SHOT:
                 holder.mRightImage.setImageResource(R.mipmap.screenshot_icon);
                 holder.mRightImage.requestLayout();
-                holder.mRightImage.getLayoutParams().width = 400;
+                holder.mRightImage.getLayoutParams().width = 200;
                 holder.mLeftImage.setVisibility(GONE);
                 break;
             case PRESENTATION_INFO:
                 holder.mRightImage.setImageResource(R.mipmap.presentation_icon);
                 holder.mRightImage.requestLayout();
-                holder.mRightImage.getLayoutParams().width = 400;
+                holder.mRightImage.getLayoutParams().width = 200;
                 holder.mLeftImage.setVisibility(GONE);
                 break;
             default: break;
         }
 
-        holder.mDate.setVisibility(View.VISIBLE);
-        holder.mDate.setText(DateTimeUtils.parseDateTime(timeLineModel.getDate(), "yyyy-MM-dd HH:mm", "hh:mm a, dd-MMM-yyyy"));
-        holder.mMessage.setText(timeLineModel.getMessage());
-    }
+        Animation animation = AnimationUtils.loadAnimation(mContext, (position > lastPosition) ? R.anim.up_from_bottom : R.anim.down_from_top);
+        result.startAnimation(animation);
+        lastPosition = position;
 
-    @Override
-    public int getItemCount() {
-        return (mFeedList!=null? mFeedList.size():0);
+        // Return the completed view to render on screen
+        return convertView;
     }
-
 }

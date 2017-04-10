@@ -20,9 +20,6 @@
             </intent-filter>
         </activity>
 
-        <activity
-            android:name="com.github.vipulasri.timeline.TimeLineActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 </manifest>

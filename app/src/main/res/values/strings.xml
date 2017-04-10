@@ -7,4 +7,7 @@
     <string name="horizontal_timeline_w_padding">Horizontal Timeline With Line Padding</string>
     <string name="vertical_timeline_w_padding">Vertical Timeline With Line Padding</string>
     <string name="voice_memo_text">Voice Memo</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

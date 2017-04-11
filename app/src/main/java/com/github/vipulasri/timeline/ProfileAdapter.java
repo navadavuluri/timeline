@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.github.vipulasri.timeline.model.ProfileModel;
+import com.github.vipulasri.timeline.utils.CircleTransform;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -58,7 +59,7 @@ public class ProfileAdapter extends BaseAdapter {
         holder.mProfilePicture = (ImageView) convertView.findViewById(R.id.profile_img);
         holder.mName = (TextView) convertView.findViewById(R.id.profile_name);
         holder.mProfilePicture.setTag(profileModel.getProfileUrl());
-        Picasso.with(context).load(profileModel.getProfileUrl()).into(holder.mProfilePicture);
+        Picasso.with(context).load(profileModel.getProfileUrl()).transform(new CircleTransform()).into(holder.mProfilePicture);
         holder.mName.setText(profileModel.getName());
         return convertView;
     }

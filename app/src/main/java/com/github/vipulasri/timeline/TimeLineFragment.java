@@ -2,7 +2,13 @@ package com.github.vipulasri.timeline;
 
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.ListFragment;
+import android.support.v4.view.ViewGroupCompat;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ListView;
 
 import com.github.vipulasri.timeline.model.MESSAGE_TYPE;
 import com.github.vipulasri.timeline.model.TimeLineModel;
@@ -10,7 +16,7 @@ import com.github.vipulasri.timeline.model.TimeLineModel;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TimeLineFragment extends ListFragment {
+public class TimeLineFragment extends Fragment {
     private List<TimeLineModel> mDataList = new ArrayList<>();
 
     private void setDataListItems(){
@@ -27,10 +33,11 @@ public class TimeLineFragment extends ListFragment {
     }
 
     @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         setDataListItems();
-        TimeLineAdapter adapter = new TimeLineAdapter(mDataList, getContext());
-        setListAdapter(adapter);
+        View rootView = inflater.inflate(R.layout.activity_timeline, container, false);
+        ListView listView = (ListView) rootView.findViewById(R.id.list);
+        listView.setAdapter(new TimeLineAdapter(mDataList, getContext()));
+        return rootView;
     }
 }

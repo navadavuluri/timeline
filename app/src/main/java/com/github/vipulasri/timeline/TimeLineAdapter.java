@@ -25,18 +25,16 @@ import static android.view.View.GONE;
 
 public class TimeLineAdapter extends ArrayAdapter<TimeLineModel> {
     private final String TAG = "Huddl";
-    private List<TimeLineModel> dataSet;
-    Context mContext;
+    private final List<TimeLineModel> items;
     MediaPlayer mPlayer = new MediaPlayer();
     String url = "http://programmerguru.com/android-tutorial/wp-content/uploads/2013/04/hosannatelugu.mp3";
     Resources res;
 
     public TimeLineAdapter(List<TimeLineModel> data, Context context) {
-        super(context, R.layout.activity_timeline, data);
-        this.dataSet  = data;
-        this.mContext = context;
+        super(context, -1, data);
         this.mPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
         res = context.getResources();
+        items = data;
     }
 
     private int lastPosition = -1;
@@ -134,7 +132,7 @@ public class TimeLineAdapter extends ArrayAdapter<TimeLineModel> {
             default: break;
         }
 
-        Animation animation = AnimationUtils.loadAnimation(mContext, (position > lastPosition) ? R.anim.up_from_bottom : R.anim.down_from_top);
+        Animation animation = AnimationUtils.loadAnimation(parent.getContext(), (position > lastPosition) ? R.anim.up_from_bottom : R.anim.down_from_top);
         result.startAnimation(animation);
         lastPosition = position;
 

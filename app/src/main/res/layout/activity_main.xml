@@ -3,16 +3,16 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
         <fragment
             android:name="com.github.vipulasri.timeline.TimeLineFragment"
             class="com.github.vipulasri.timeline.TimeLineFragment"
             android:id="@+id/timeline"
             android:layout_weight="1"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_width="0dp"
             android:layout="@layout/activity_timeline"/>
 
@@ -20,15 +20,14 @@
             android:id="@+id/webviewfrag"
             android:layout_width="0dp"
             android:layout_weight="2"
-            android:layout_height="match_parent"
-            class="com.github.vipulasri.timeline.WebViewFragment"
-            android:layout_toLeftOf="@+id/timeline" />
+            android:layout_height="wrap_content"
+            class="com.github.vipulasri.timeline.WebViewFragment" />
 
         <!--<fragment-->
             <!--android:layout_width="match_parent"-->
             <!--android:layout_height="match_parent"-->
             <!--android:layout_toLeftOf="@+id/webview" />-->
-    </RelativeLayout>
+    </LinearLayout>
 
     <!--<fragment-->
         <!--android:id="@+id/profileview"-->

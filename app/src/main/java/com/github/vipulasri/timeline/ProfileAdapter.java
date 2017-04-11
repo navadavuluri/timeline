@@ -15,7 +15,6 @@ import com.github.vipulasri.timeline.utils.CircleTransform;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
-import java.util.Objects;
 
 public class ProfileAdapter extends BaseAdapter {
     private final String TAG = "Huddl";

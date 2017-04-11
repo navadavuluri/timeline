@@ -8,6 +8,7 @@
         android:layout_width="fill_parent"
         android:layout_weight="1"
         android:layout_height="wrap_content">
+
         <fragment
             android:name="com.github.vipulasri.timeline.TimeLineFragment"
             class="com.github.vipulasri.timeline.TimeLineFragment"
@@ -24,14 +25,12 @@
             android:layout_height="wrap_content"
             class="com.github.vipulasri.timeline.WebViewFragment" />
 
-        <!--<fragment-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:layout_toLeftOf="@+id/webview" />-->
     </LinearLayout>
+
     <fragment class="com.github.vipulasri.timeline.ProfilesFragment"
         android:layout_weight="1"
         android:id="@+id/profileview"
         android:layout_width="fill_parent"
         android:layout_height="200sp" />
+
 </LinearLayout>

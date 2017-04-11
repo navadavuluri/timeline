@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -13,16 +14,16 @@ import com.github.vipulasri.timeline.model.ProfileModel;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
+import java.util.Objects;
 
-public class ProfileAdapter extends ArrayAdapter<ProfileModel> {
+public class ProfileAdapter extends BaseAdapter {
     private final String TAG = "Huddl";
     private final List<ProfileModel> items;
     Resources res;
     Context context;
 
-    public ProfileAdapter(List<ProfileModel> data, Context context) {
-        super(context, -1, data);
-        this.context = getContext();
+    public ProfileAdapter(Context context, List<ProfileModel> data) {
+        this.context = context;
         res = context.getResources();
         items = data;
     }
@@ -33,12 +34,22 @@ public class ProfileAdapter extends ArrayAdapter<ProfileModel> {
     }
 
     @Override
+    public Object getItem(int position) {
+        return items.get(position);
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+    @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ProfileModel profileModel = getItem(position);
+        ProfileModel profileModel = (ProfileModel) getItem(position);
         ProfileHolder holder; // view lookup cache stored in tag
 
         if (convertView == null) {
-            LayoutInflater inflater = LayoutInflater.from(getContext());
+            LayoutInflater inflater = LayoutInflater.from(context);
             convertView = inflater.inflate(R.layout.profile_item, parent, false);
             holder = new ProfileHolder(convertView);
             convertView.setTag(holder);

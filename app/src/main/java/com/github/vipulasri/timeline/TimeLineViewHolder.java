@@ -4,6 +4,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.github.vipulasri.timelineview.LineType;
 import com.github.vipulasri.timelineview.TimelineView;
 
 import butterknife.BindView;
@@ -24,7 +25,7 @@ public class TimeLineViewHolder {
 
     public TimeLineViewHolder(View view, int viewType) {
         ButterKnife.bind(this, view);
-        mTimelineView.initLine(viewType);
-
+        mTimelineView.initLine(LineType.NORMAL);
+        mTimelineView.setMarkerColor(R.color.colorPrimary);
     }
 }

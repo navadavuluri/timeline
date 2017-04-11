@@ -33,9 +33,9 @@
             android:gravity="center"
             android:orientation="vertical">
 
-            <android.support.v7.widget.AppCompatTextView
+            <TextView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="20sp"
                 android:id="@+id/text_timeline_date"
                 android:textSize="12sp"
                 tools:text="24 JAN"/>

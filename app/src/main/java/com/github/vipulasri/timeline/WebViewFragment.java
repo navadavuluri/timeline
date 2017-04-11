@@ -14,6 +14,8 @@ import android.webkit.WebViewClient;
 public class WebViewFragment extends Fragment {
 
     private String currentURL;
+    private String presentationURL = "https://clearvoice.meeamitech.com/huddl/presentation.html";
+    private String salesforceURL = "https://app.drastin.com/#/query/f11c81c24d0d4229928e97e2d495f4ab/";
 
     public void init(String url) {
         currentURL = url;
@@ -30,7 +32,7 @@ public class WebViewFragment extends Fragment {
 
         Log.d("SwA", "WVF onCreateView");
         View v = inflater.inflate(R.layout.webview_layout, container, false);
-        init("https://www.google.com");
+        init(salesforceURL);
         if (currentURL != null) {
             Log.d("SwA", "Current URL 1["+currentURL+"]");
 

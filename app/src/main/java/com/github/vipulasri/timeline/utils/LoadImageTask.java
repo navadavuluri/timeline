@@ -11,12 +11,10 @@ import java.net.URL;
 public class LoadImageTask extends AsyncTask<String, Void, Bitmap> {
 
     public LoadImageTask(Listener listener) {
-
         mListener = listener;
     }
 
-    public interface Listener{
-
+    public interface Listener {
         void onImageLoaded(Bitmap bitmap);
         void onError();
     }
@@ -24,11 +22,8 @@ public class LoadImageTask extends AsyncTask<String, Void, Bitmap> {
     private Listener mListener;
     @Override
     protected Bitmap doInBackground(String... args) {
-
         try {
-
             return BitmapFactory.decodeStream((InputStream)new URL(args[0]).getContent());
-
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -39,11 +34,8 @@ public class LoadImageTask extends AsyncTask<String, Void, Bitmap> {
     protected void onPostExecute(Bitmap bitmap) {
 
         if (bitmap != null) {
-
             mListener.onImageLoaded(bitmap);
-
         } else {
-
             mListener.onError();
         }
     }
